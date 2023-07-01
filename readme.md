@@ -39,6 +39,7 @@ az deployment group create --resource-group resource_group_1 --template-file ./a
  - クライアントPCにVisual Studio 2022をインストールします(ASP.NETの開発環境を選ぶこと)。
  - チェックアウトしたリポジトリに含まれる`cosmoschatgpt.sln`を開きます
  - `appsettings.json`の`OpenAi.Key`の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
+ - 同様に、CosmosDBのエンドポイントとキーをAzureから取得し、`appsettings.json`の変数に設定します。
  - ツールバーの`[三角]cosmosdbchat`をクリックし、実行します。
 
 Azure上にCosmosDBリソースが作成されています。また、利用しないApp Serviceリソースも作成されていますので適宜削除などしてください。
