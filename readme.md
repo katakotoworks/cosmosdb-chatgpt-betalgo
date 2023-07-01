@@ -11,28 +11,53 @@ description: Sample application that implements multiple chat threads using the 
 azureDeploy: https://raw.githubusercontent.com/katakotoworks/cosmosdb-chatgpt-betalgo/main/azuredeploy.json
 ---
 
-# �{�Ƃ���̕ύX�_
+# 本家からの変更点
 
- - OpenAI�Ђ̃T�[�r�X��Betalgo�o�R�ŗ��p����悤�ɕύX
- - ���|�W�g���̎Q�Ɛ��ύX
+ - OpenAI社のサービスをBetalgo経由で利用するように変更
+ - リポジトリの参照先を変更
 
-# �f�v���C���@
+# Azureへのデプロイ方法(1)
 
- - Azure�ɃA�J�E���g�ƃT�u�X�N���v�V�������쐬���܂��B
- - ���\�[�X�O���[�v"resource_group_1"�����[�W����"(US) South Central US"�ɍ쐬���܂�
- - �N���C�A���gPC��Azuer CLI���Z�b�g�A�b�v���܂�
- - �ȉ��̃R�}���h�����s���܂�
+ - Azureにアカウントとサブスクリプションを作成します。
+ - リソースグループ"resource_group_1"をリージョン"(US) South Central US"に作成します
+ - クライアントPCにAzuer CLIをセットアップします
+ - 以下のコマンドを実行します
 ```
 az deployment group create --resource-group resource_group_1 --template-file ./azuredeploy.bicep
 ```
- - Azure�ɍ쐬���ꂽApp Service���\�[�X�́u�ݒ�v���u�\���v��"OPENAI_KEY"�̒l���AOpenAI�Ђ�ChatGPT�T�[�r�X����擾����API�L�[�̒l�ɕύX���܂�
+ - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
+ - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
 
- - Azure�ɍ쐬���ꂽApp Service���\�[�X�́u�T�v�v���u����̃h���C���v���N���b�N���A�V�X�e���ɃA�N�Z�X���܂�
+# Azureへのデプロイ方法(2)
 
-# �O�����
+ - Azureにアカウントとサブスクリプションを作成します。
+ - 以下のDeploy to Azureボタンを押下して画面の指示に従います。
 
- - �T�u�X�N���v�V�������CosmosDB�̃C���X�^���X�����݂��Ȃ�����(Azure�̖����T�u�X�N���v�V�������ƁACosmosDB�̃C���X�^���X��1�����쐬�ł��Ȃ�����)
- - OpenAI�Ђ�ChatGPT�T�[�r�X�̃A�J�E���g�����L���Ă��邱��
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkatakotoworks%2Fcosmosdb-chatgpt-betalgo%2Fmain%2Fazuredeploy.json)
+
+ - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
+ - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
+
+# ローカルでの起動方法
+
+ - Azureにアカウントとサブスクリプションを作成します。
+ - リソースグループ"resource_group_1"をリージョン"(US) South Central US"に作成します
+ - クライアントPCにAzuer CLIをセットアップします
+ - 以下のコマンドを実行します
+```
+az deployment group create --resource-group resource_group_1 --template-file ./azuredeploy.bicep
+```
+ - ローカルにVisual Studio 2022をインストールします(ASP.NETの開発環境を選ぶこと)。
+ - チェックアウトしたリポジトリに含まれる`cosmoschatgpt.sln`を開きます
+ - `appsettings.json`の`OpenAi.Key`の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
+ - ツールバーの`[三角]cosmosdbchat`をクリックし、実行します。
+
+Azure上にCosmosDBリソースが作成されています。また、利用しないApp Serviceリソースも作成されていますので適宜削除などしてください。
+
+# 前提条件
+
+ - サブスクリプション上にCosmosDBのインスタンスが存在しないこと(Azureの無料サブスクリプションだと、CosmosDBのインスタンスが1つしか作成できないため)
+ - OpenAI社のChatGPTサービスのアカウントを所有していること
 
 
 # Azure Cosmos DB + OpenAI ChatGPT
