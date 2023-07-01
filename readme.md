@@ -27,6 +27,8 @@ az deployment group create --resource-group resource_group_1 --template-file ./a
  - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
  - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
 
+いずれのデプロイ方法も、Azure上のApp Serviceが本リポジトリからソースコードを取得、ビルド、デプロイします。
+
 # クライアントPCでの起動方法
 
  - Azureにアカウントとサブスクリプションを作成します。
