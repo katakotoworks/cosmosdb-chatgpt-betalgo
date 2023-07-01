@@ -160,7 +160,7 @@ resource appServiceWebSettings 'Microsoft.Web/sites/config@2022-03-01' = {
     OPENAI__ENDPOINT: 'nop'
     OPENAI__KEY: 'to_be_configured'
     OPENAI__MODELNAME: 'nop'
-    OPENAI__MAXCONVERSATIONTOKENS: 'to_be_configured'
+    OPENAI__MAXCONVERSATIONTOKENS: '2000'
   }
 }
 
