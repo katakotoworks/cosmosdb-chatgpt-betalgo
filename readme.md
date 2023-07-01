@@ -27,7 +27,7 @@ az deployment group create --resource-group resource_group_1 --template-file ./a
  - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
  - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
 
-# ローカルでの起動方法
+# クライアントPCでの起動方法
 
  - Azureにアカウントとサブスクリプションを作成します。
  - リソースグループ"resource_group_1"をリージョン"(US) South Central US"に作成します
@@ -36,7 +36,7 @@ az deployment group create --resource-group resource_group_1 --template-file ./a
 ```
 az deployment group create --resource-group resource_group_1 --template-file ./azuredeploy.bicep
 ```
- - ローカルにVisual Studio 2022をインストールします(ASP.NETの開発環境を選ぶこと)。
+ - クライアントPCにVisual Studio 2022をインストールします(ASP.NETの開発環境を選ぶこと)。
  - チェックアウトしたリポジトリに含まれる`cosmoschatgpt.sln`を開きます
  - `appsettings.json`の`OpenAi.Key`の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
  - ツールバーの`[三角]cosmosdbchat`をクリックし、実行します。
