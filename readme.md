@@ -8,22 +8,22 @@
 # Azureへのデプロイ方法(1)
 
  - Azureにアカウントとサブスクリプションを作成します。
- - リソースグループ"resource_group_1"をリージョン"(US) South Central US"に作成します
- - クライアントPCにAzuer CLIをセットアップします
- - 以下のコマンドを実行します
-```
-az deployment group create --resource-group resource_group_1 --template-file ./azuredeploy.bicep
-```
+ - 以下のDeploy to Azureボタンを押下して画面の指示に従います。
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkatakotoworks%2Fcosmosdb-chatgpt-betalgo%2Fmain%2Fazuredeploy.json)
+
  - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
  - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
 
 # Azureへのデプロイ方法(2)
 
  - Azureにアカウントとサブスクリプションを作成します。
- - 以下のDeploy to Azureボタンを押下して画面の指示に従います。
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fkatakotoworks%2Fcosmosdb-chatgpt-betalgo%2Fmain%2Fazuredeploy.json)
-
+ - リソースグループ"resource_group_1"をリージョン"(US) South Central US"に作成します
+ - クライアントPCにAzuer CLIをセットアップします
+ - 以下のコマンドを実行します
+```
+az deployment group create --resource-group resource_group_1 --template-file ./azuredeploy.bicep
+```
  - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
  - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
 
