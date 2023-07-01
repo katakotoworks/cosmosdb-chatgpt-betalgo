@@ -59,16 +59,16 @@
     },
     "appGitRepository": {
       "type": "string",
-      "defaultValue": "https://github.com/azure-samples/cosmosdb-chatgpt.git",
+      "defaultValue": "https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo.git",
       "metadata": {
-        "description": "Git repository URL for the chat application. This defaults to the [`azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt) repository."
+        "description": "Git repository URL for the chat application. This defaults to the [`katakotoworks/cosmosdb-chatgpt-betalgo`](https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo) repository."
       }
     },
     "appGetRepositoryBranch": {
       "type": "string",
       "defaultValue": "main",
       "metadata": {
-        "description": "Git repository branch for the chat application. This defaults to the [**main** branch of the `azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt/tree/main) repository."
+        "description": "Git repository branch for the chat application. This defaults to the [**main** branch of the `katakotoworks/cosmosdb-chatgpt-betalgo`](https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo/tree/main) repository."
       }
     }
   },

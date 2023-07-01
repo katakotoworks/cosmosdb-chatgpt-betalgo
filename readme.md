@@ -8,7 +8,7 @@ products:
 name: Sample chat app using Azure Cosmos DB for NoSQL and Azure OpenAI
 urlFragment: chat-app
 description: Sample application that implements multiple chat threads using the Azure OpenAI "text-davinci-003" model and Azure Cosmos DB for NoSQL for storage.
-azureDeploy: https://raw.githubusercontent.com/azure-samples/cosmosdb-chatgpt/main/azuredeploy.json
+azureDeploy: https://raw.githubusercontent.com/katakotoworks/cosmosdb-chatgpt-betalgo/main/azuredeploy.json
 ---
 
 # Azure Cosmos DB + OpenAI ChatGPT
@@ -47,7 +47,7 @@ Please note this is a sample application. It is intended to demonstrate how to u
 ### Installation
 
 1. Fork this repository to your own GitHub account.
-1. Depending on whether you deploy using the ARM Template or Bicep, modify this variable in one of those files to point to your fork of this repository, "webSiteRepository": "https://github.com/Azure-Samples/cosmosdb-chatgpt.git" 
+1. Depending on whether you deploy using the ARM Template or Bicep, modify this variable in one of those files to point to your fork of this repository, "webSiteRepository": "https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo.git" 
 1. If using the Deploy to Azure button below, also modify this README.md file to change the path for the Deploy To Azure button to your local repository.
 1. If you deploy this application without making either of these changes, you can update the repository by disconnecting and connecting an external git repository pointing to your fork.
 

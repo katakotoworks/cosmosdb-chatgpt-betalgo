@@ -32,10 +32,10 @@ param appServiceSku string = 'F1'
 ])
 param openAiSku string = 'S0'
 
-@description('Git repository URL for the chat application. This defaults to the [`azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt) repository.')
-param appGitRepository string = 'https://github.com/azure-samples/cosmosdb-chatgpt.git'
+@description('Git repository URL for the chat application. This defaults to the [`katakotoworks/cosmosdb-chatgpt-betalgo`](https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo) repository.')
+param appGitRepository string = 'https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo.git'
 
-@description('Git repository branch for the chat application. This defaults to the [**main** branch of the `azure-samples/cosmosdb-chatgpt`](https://github.com/azure-samples/cosmosdb-chatgpt/tree/main) repository.')
+@description('Git repository branch for the chat application. This defaults to the [**main** branch of the `katakotoworks/cosmosdb-chatgpt-betalgo`](https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo/tree/main) repository.')
 param appGetRepositoryBranch string = 'main'
 
 var openAiSettings = {
