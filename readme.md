@@ -3,7 +3,7 @@
  - Microsoftの[Azure Cosmos DB + OpenAI ChatGPT](https://github.com/Azure-Samples/cosmosdb-chatgpt)サンプルを、Azure OpenAIではなく、OpenAI社のサービスを利用するように変更したものです。
  - Azure OpenAIは、エンラープライズ契約がないと利用できないため、個人のAzureサブスクリプションで同サンプルを動かすために作成しました。
  - ソースコードとしては、Azure OpenAIへのアクセスを責務とするサービス`OpenAiService.cs`のみ修正しており、他の箇所の修正はありません。
- - OpenAI社のサービスにアクセスする方法として、[Beltago.OpenAI](https://github.com/betalgo/openai)を利用しています。
+ - OpenAI社のサービスにアクセスする方法として、[Betalgo.OpenAI](https://github.com/betalgo/openai)を利用しています。
 
 # Azureへのデプロイ方法(1)
 
