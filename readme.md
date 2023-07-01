@@ -11,6 +11,30 @@ description: Sample application that implements multiple chat threads using the 
 azureDeploy: https://raw.githubusercontent.com/katakotoworks/cosmosdb-chatgpt-betalgo/main/azuredeploy.json
 ---
 
+# 本家からの変更点
+
+ - OpenAI社のサービスをBetalgo経由で利用するように変更
+ - リポジトリの参照先を変更
+
+# デプロイ方法
+
+ - Azureにアカウントとサブスクリプションを作成します。
+ - リソースグループ"resource_group_1"をリージョン"(US) South Central US"に作成します
+ - クライアントPCにAzuer CLIをセットアップします
+ - 以下のコマンドを実行します
+```
+az deployment group create --resource-group resource_group_1 --template-file ./azuredeploy.bicep
+```
+ - Azureに作成されたApp Serviceリソースの「設定」→「構成」→"OPENAI_KEY"の値を、OpenAI社のChatGPTサービスから取得したAPIキーの値に変更します
+
+ - Azureに作成されたApp Serviceリソースの「概要」→「既定のドメイン」をクリックし、システムにアクセスします
+
+# 前提条件
+
+ - サブスクリプション上にCosmosDBのインスタンスが存在しないこと(Azureの無料サブスクリプションだと、CosmosDBのインスタンスが1つしか作成できないため)
+ - OpenAI社のChatGPTサービスのアカウントを所有していること
+
+
 # Azure Cosmos DB + OpenAI ChatGPT
 
 This sample application combines Azure Cosmos DB with OpenAI ChatGPT with a Blazor Server front-end for an intelligent chat bot application that shows off how you can build a 

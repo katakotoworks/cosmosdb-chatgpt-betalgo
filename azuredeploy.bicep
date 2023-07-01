@@ -38,19 +38,6 @@ param appGitRepository string = 'https://github.com/katakotoworks/cosmosdb-chatg
 @description('Git repository branch for the chat application. This defaults to the [**main** branch of the `katakotoworks/cosmosdb-chatgpt-betalgo`](https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo/tree/main) repository.')
 param appGetRepositoryBranch string = 'main'
 
-var openAiSettings = {
-  name: '${name}-openai'
-  sku: openAiSku
-  maxConversationTokens: '2000'
-  model: {
-    name: 'gpt-35-turbo'
-    version: '0301'
-    deployment: {
-      name: 'chatmodel'
-    }
-  }
-}
-
 var cosmosDbSettings = {
   name: '${name}-cosmos-nosql'
   enableFreeTier: cosmosDbEnableFreeTier
@@ -144,34 +131,6 @@ resource cosmosDbContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/c
   }
 }
 
-resource openAiAccount 'Microsoft.CognitiveServices/accounts@2022-12-01' = {
-  name: openAiSettings.name
-  location: location
-  sku: {
-    name: openAiSettings.sku
-  }
-  kind: 'OpenAI'
-  properties: {
-    customSubDomainName: openAiSettings.name
-    publicNetworkAccess: 'Enabled'
-  }
-}
-
-resource openAiModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2022-12-01' = {
-  parent: openAiAccount
-  name: openAiSettings.model.deployment.name
-  properties: {
-    model: {
-      format: 'OpenAI'
-      name: openAiSettings.model.name
-      version: openAiSettings.model.version
-    }
-    scaleSettings: {
-      scaleType: 'Standard'
-    }
-  }
-}
-
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: appServiceSettings.plan.name
   location: location
@@ -198,10 +157,10 @@ resource appServiceWebSettings 'Microsoft.Web/sites/config@2022-03-01' = {
     COSMOSDB__KEY: cosmosDbAccount.listKeys().primaryMasterKey
     COSMOSDB__DATABASE: cosmosDbDatabase.name
     COSMOSDB__CONTAINER: cosmosDbContainer.name
-    OPENAI__ENDPOINT: openAiAccount.properties.endpoint
-    OPENAI__KEY: openAiAccount.listKeys().key1
-    OPENAI__MODELNAME: openAiModelDeployment.name
-    OPENAI__MAXCONVERSATIONTOKENS: openAiSettings.maxConversationTokens
+    OPENAI__ENDPOINT: 'nop'
+    OPENAI__KEY: 'to_be_configured'
+    OPENAI__MODELNAME: 'nop'
+    OPENAI__MAXCONVERSATIONTOKENS: 'nop'
   }
 }
 

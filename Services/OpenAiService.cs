@@ -1,16 +1,17 @@
-﻿using Azure;
-using Azure.AI.OpenAI;
-using Cosmos.Chat.GPT.Models;
+﻿using OpenAI.Interfaces;
+using OpenAI.Managers;
+using OpenAI.ObjectModels;
+using OpenAI.ObjectModels.RequestModels;
+using OpenAI.ObjectModels.ResponseModels;
 
 namespace Cosmos.Chat.GPT.Services;
 
 /// <summary>
-/// Service to access Azure OpenAI.
+/// Service to access OpenAI via Betalgo.OpenAI.
 /// </summary>
 public class OpenAiService
 {
-    private readonly string _modelName = String.Empty;
-    private readonly OpenAIClient _client;
+    private readonly IOpenAIService openAIService;
 
     /// <summary>
     /// System prompt to send with user prompts to instruct the model for chat session
@@ -37,13 +38,12 @@ public class OpenAiService
     /// </remarks>
     public OpenAiService(string endpoint, string key, string modelName)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(modelName);
-        ArgumentNullException.ThrowIfNullOrEmpty(endpoint);
         ArgumentNullException.ThrowIfNullOrEmpty(key);
 
-        _modelName = modelName;
-
-        _client = new(new Uri(endpoint), new AzureKeyCredential(key));
+        this.openAIService = new OpenAIService(new OpenAI.OpenAiOptions()
+        {
+            ApiKey = key
+        });
     }
 
     /// <summary>
@@ -55,34 +55,36 @@ public class OpenAiService
     public async Task<(string response, int promptTokens, int responseTokens)> GetChatCompletionAsync(string sessionId, string userPrompt)
     {
         
-        ChatMessage systemMessage = new(ChatRole.System, _systemPrompt);
-        ChatMessage userMessage = new(ChatRole.User, userPrompt);
-        
-        ChatCompletionsOptions options = new()
+        ChatMessage systemMessage = new(StaticValues.ChatMessageRoles.System, _systemPrompt);
+        ChatMessage userMessage = new(StaticValues.ChatMessageRoles.User, userPrompt);
+
+        ChatCompletionCreateResponse completionsResponse = await openAIService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest()
         {
-            
-            Messages =
-            {
-                //systemMessage,
-                userMessage
-            },
-            User = sessionId,
-            MaxTokens = 4000,
+            Messages = new List<ChatMessage>() { systemMessage, userMessage },
+            Model = OpenAI.ObjectModels.Models.ChatGpt3_5Turbo,
+            MaxTokens = 2000,//total limit:4096, conversation tokens(defined at appsettings):2000 -> tokens remain:2000
             Temperature = 0.3f,
-            NucleusSamplingFactor = 0.5f,
+            TopP = 1,
             FrequencyPenalty = 0,
             PresencePenalty = 0
-        };
+        }); 
 
-        Response<ChatCompletions> completionsResponse = await _client.GetChatCompletionsAsync(_modelName, options);
-
-
-        ChatCompletions completions = completionsResponse.Value;
-
+        if (!completionsResponse.Successful)
+        {
+            if (completionsResponse.Error == null)
+            {
+                throw new Exception("Unknown Error");
+            }
+            return (
+                response: completionsResponse.Error.Code+":"+completionsResponse.Error.Message,
+                promptTokens: 0,
+                responseTokens: 0
+            );
+        }
         return (
-            response: completions.Choices[0].Message.Content,
-            promptTokens: completions.Usage.PromptTokens,
-            responseTokens: completions.Usage.CompletionTokens
+            response: completionsResponse.Choices[0].Message.Content,
+            promptTokens: completionsResponse.Usage.PromptTokens,
+            responseTokens: completionsResponse.Usage.CompletionTokens??0
         );
     }
 
@@ -95,28 +97,21 @@ public class OpenAiService
     public async Task<string> SummarizeAsync(string sessionId, string userPrompt)
     {
         
-        ChatMessage systemMessage = new(ChatRole.System, _summarizePrompt);
-        ChatMessage userMessage = new(ChatRole.User, userPrompt);
+        ChatMessage systemMessage = new(StaticValues.ChatMessageRoles.System, _summarizePrompt);
+        ChatMessage userMessage = new(StaticValues.ChatMessageRoles.User, userPrompt);
         
-        ChatCompletionsOptions options = new()
+        ChatCompletionCreateResponse completionsResponse = await openAIService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest()
         {
-            Messages = { 
-                systemMessage,
-                userMessage
-            },
-            User = sessionId,
+            Messages = new List<ChatMessage>() { systemMessage, userMessage },
+            Model = OpenAI.ObjectModels.Models.ChatGpt3_5Turbo,
             MaxTokens = 200,
             Temperature = 0.0f,
-            NucleusSamplingFactor = 1.0f,
+            TopP = 1,
             FrequencyPenalty = 0,
             PresencePenalty = 0
-        };
+        });
 
-        Response<ChatCompletions> completionsResponse = await _client.GetChatCompletionsAsync(_modelName, options);
-
-        ChatCompletions completions = completionsResponse.Value;
-
-        string summary =  completions.Choices[0].Message.Content;
+        string summary = completionsResponse.Choices[0].Message.Content;
 
         return summary;
     }
