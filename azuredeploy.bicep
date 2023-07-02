@@ -26,12 +26,6 @@ param cosmosDbEnableFreeTier bool = true
 ])
 param appServiceSku string = 'F1'
 
-@description('Specifies the SKU for the Azure OpenAI resource. Defaults to **S0**')
-@allowed([
-  'S0'
-])
-param openAiSku string = 'S0'
-
 @description('Git repository URL for the chat application. This defaults to the [`katakotoworks/cosmosdb-chatgpt-betalgo`](https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo) repository.')
 param appGitRepository string = 'https://github.com/katakotoworks/cosmosdb-chatgpt-betalgo.git'
 
