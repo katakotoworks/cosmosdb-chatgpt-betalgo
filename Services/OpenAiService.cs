@@ -61,7 +61,7 @@ public class OpenAiService
         ChatCompletionCreateResponse completionsResponse = await openAIService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest()
         {
             Messages = new List<ChatMessage>() { systemMessage, userMessage },
-            Model = OpenAI.ObjectModels.Models.ChatGpt3_5Turbo,
+            Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo,
             MaxTokens = 2000,//total limit:4096, conversation tokens(defined at appsettings):2000 -> tokens remain:2000
             Temperature = 0.3f,
             TopP = 1,
@@ -103,7 +103,7 @@ public class OpenAiService
         ChatCompletionCreateResponse completionsResponse = await openAIService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest()
         {
             Messages = new List<ChatMessage>() { systemMessage, userMessage },
-            Model = OpenAI.ObjectModels.Models.ChatGpt3_5Turbo,
+            Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo,
             MaxTokens = 200,
             Temperature = 0.0f,
             TopP = 1,
